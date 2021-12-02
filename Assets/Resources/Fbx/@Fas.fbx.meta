@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c4a8c469a4a9854f990d25c3d41c848
+guid: 8eea5607351f4724aa393ec45ee2b2e1
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
@@ -500,23 +500,23 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: '@FastRun23 (1)(Clone)'
+    - name: '@Fas(Clone)'
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Alpha_Surface
-      parentName: '@FastRun23 (1)(Clone)'
+      parentName: '@Fas(Clone)'
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Alpha_Joints
-      parentName: '@FastRun23 (1)(Clone)'
+      parentName: '@Fas(Clone)'
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: '@FastRun23 (1)(Clone)'
+      parentName: '@Fas(Clone)'
       position: {x: -0.0025149977, y: 1.0258603, z: 0.0081759775}
       rotation: {x: 0.000000011641534, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1.0000001}

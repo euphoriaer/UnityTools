@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 public class AnimationSpreat : AssetPostprocessor
@@ -20,8 +21,8 @@ public class AnimationSpreat : AssetPostprocessor
 
     private void OnPostprocessModel(GameObject g)
     {
-        string cilpName = g.name + ".anim";
-        Debug.Log("动画分离2" + assetPath + "   " + cilpName);
+        string name = g.name;
+        Debug.Log("动画资源分离" + assetPath + "   ");
         EditorApplication.delayCall += () =>
         {
             if (assetPath.Contains(ToolsSettings.Instance.Mark))
@@ -29,17 +30,35 @@ public class AnimationSpreat : AssetPostprocessor
                 //copy 动画
                 var assets = AssetDatabase.LoadAllAssetRepresentationsAtPath(assetPath);
 
+                //copy Avata
                 foreach (var obj in assets)
                 {
-                    Debug.Log(obj.name);
+                    Debug.Log("FBX中的资源" + obj.name);
+
+                    if (obj is AnimationClip)
+                    {
+                        var newClip = UnityEngine.Object.Instantiate(obj);
+                        AssetDatabase.CreateAsset(newClip, ToolsSettings.Instance.Anim + "/" + name + ".anim");
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
+
+                    if (obj is Avatar)
+                    {
+                        var newAvatar = UnityEngine.Object.Instantiate(obj);
+                        AssetDatabase.CreateAsset(newAvatar, ToolsSettings.Instance.Avatarfolder + "/" + name + ".asset");
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
                 }
 
-                AnimationClip clip = AssetDatabase.LoadAssetAtPath(assetPath, typeof(AnimationClip)) as AnimationClip;
-
-                var newClip = UnityEngine.Object.Instantiate(clip);
-                AssetDatabase.CreateAsset(newClip, "Assets/Resources/动画" + "/" + cilpName);
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
+                //move fbx
+                if (assetPath != ToolsSettings.Instance.FBXfolder)
+                {
+                    Debug.Log("移动资源" + assetPath);
+                    string path = Path.GetFileName(assetPath);
+                    AssetDatabase.MoveAsset(assetPath, ToolsSettings.Instance.FBXfolder + "/" + path);
+                }
             }
             else
             {
